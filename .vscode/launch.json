@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-GeneticCars<ai-genetic-cars_dc92c9d>",
+            "request": "launch",
+            "mainClass": "GeneticCars",
+            "projectName": "ai-genetic-cars_dc92c9d"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Interactive<ai-genetic-cars_dc92c9d>",
+            "request": "launch",
+            "mainClass": "Interactive",
+            "projectName": "ai-genetic-cars_dc92c9d"
+        }
+    ]
+}
