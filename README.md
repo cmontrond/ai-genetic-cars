@@ -1,4 +1,4 @@
-# Second Project: Maze
+# Fourth Project: Genetic Cars
 
 Fourth Project for COMP 560: Artificial Intelligence at Bridgewater State University.<br>
 
