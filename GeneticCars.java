@@ -127,10 +127,35 @@ public class GeneticCars implements MouseListener
 	public void kill()
 	{
 		//make a "keep" arraylist of cars
+		ArrayList<Car> carsToKeep = new ArrayList<Car>();
+
 		//Do this KILLTOPOPULATION times:
-			// go through your population and find the best car.  Use the compare function (below).
+		for (int i = 0; i < KILLTOPOPULATION; i++)
+		{
+			Car bestCar = population.get(0);
+			int bestCarIndex = 0;
+
+			// go through your population and find the best car.
+			// Use the compare function (below).
+			for (int index = 0; index < population.size(); index++) 
+			{
+				Car car = population.get(index);
+				
+				// if car is better than bestCar
+				if (compare(car, bestCar))
+				{
+					bestCar = car;
+					bestCarIndex = index;
+				}
+			}
+
 			// remove the best car from population and put it in the keep list
+			population.remove(bestCarIndex);
+			carsToKeep.add(bestCar);
+		}
+
 		//set population=keep to make the keep list your population
+		population = carsToKeep;
 	}
 
 	//false if a is better, true if b is better
