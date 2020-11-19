@@ -170,14 +170,52 @@ public class Car
 	//It should return a car "newcar" that is identical to the current car, except with mutations
 	public Car mutate(double probability)
 	{
-		Car newcar=new Car(nodes);
+		Car newCar = new Car(nodes);
 
 		//YOUR WORK HERE
-		//  You should copy over the car's balls_x and balls_y to newcar
-			//with probability "probability", change the balls_x and balls_y to a random number from 5 to 50
-		//  Then copy over the links
-		//	//with probability "probability", set the link to true/false (50/50 chance)
 
-		return newcar;
+		//  You should copy over the car's balls_x and balls_y to newcar
+		newCar.balls_x = this.balls_x;
+		newCar.balls_y = this.balls_y;
+
+		//with probability "probability"
+		// change the balls_x and balls_y to a random number from 5 to 50
+		for(int i = 0; i < nodes; i++)
+		{
+			if (Math.random() < probability)
+			{
+				newCar.balls_x[i] = randint(5,50);
+				newCar.balls_y[i] = randint(5,50);
+			}
+		}
+
+		//  Then copy over the links
+		newCar.linkmatrix = this.linkmatrix;
+
+		// with probability "probability"
+		//  set the link to true/false (50/50 chance)
+		for(int i = 0; i < nodes; i++)
+		{
+			for(int j = 0; j < nodes; j++)
+			{
+				if (Math.random() < probability)
+				{
+					// Random random = new Random();
+					
+					// if (random.nextInt(2) == 1)
+					// {
+					// 	newCar.linkmatrix[i][j] = true;
+					// }
+					// else
+					// {
+					// 	newCar.linkmatrix[i][j] = false;	
+					// }
+
+					newCar.linkmatrix[i][j] = !newCar.linkmatrix[i][j];
+				}
+			}
+		}
+
+		return newCar;
 	}
 }
