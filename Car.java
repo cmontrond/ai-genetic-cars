@@ -103,7 +103,7 @@ public class Car
 	//It should return a "child" car that is the crossover between this car and parameter car c
 	public Car breed(Car mate)
 	{
-		Car child=new Car(nodes);
+		Car child = new Car(nodes);
 
 		//YOUR WORK HERE
 
