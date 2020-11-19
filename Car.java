@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /*
 MODIFY THIS CLASS TO MATE TWO CARS AND MUTATE CARS
 
@@ -99,20 +101,66 @@ public class Car
 	//TODO
 	//YOU WRITE THIS FUNCTION
 	//It should return a "child" car that is the crossover between this car and parameter car c
-	public Car breed(Car c)
+	public Car breed(Car mate)
 	{
 		Car child=new Car(nodes);
 
-
 		//YOUR WORK HERE
 
-		//Choose a random crossover point.  Also choose a car to go first
+		// Choose a car to go first
+		Random random = new Random();
+
+		Car firstParent;
+		Car secondParent;
+
+		// generate int (0 or 1)
+		if (random.nextInt(2) == 1)
+		{
+			firstParent = this;
+			secondParent = mate;
+		}
+		else
+		{
+			firstParent = mate;
+			secondParent = this;
+		}
+
+		//Choose a random crossover point.
+		int crossoverPoint = (int) (Math.random() * nodes); // 0..nodes
 
 		// copy the balls from the first car's balls_x and balls_y to the child
+		for (int i = 0; i < crossoverPoint; i++)
+		{
+			child.balls_x[i] = firstParent.balls_x[i];
+			child.balls_y[i] = firstParent.balls_y[i];
+		}
+
 		// after the crossover, copy the balls_x and balls_y from the second car to the child
+		for (int i = crossoverPoint; i < nodes; i++)
+		{
+			child.balls_x[i] = secondParent.balls_x[i];
+			child.balls_y[i] = secondParent.balls_y[i];
+		}
 
-		//pick a new crossover point, then do the same with the linkmatrix
+		// Pick up new crossover point
+		crossoverPoint = (int) (Math.random() * nodes); // 0..nodes
 
+		// do the same with the linkmatrix
+		for(int i = 0; i < crossoverPoint; i++)
+		{
+			for(int j = 0; j < crossoverPoint; j++)
+			{
+				child.linkmatrix[i][j] = firstParent.linkmatrix[i][j];
+			}
+		}
+
+		for(int i = crossoverPoint; i < nodes; i++)
+		{
+			for(int j = crossoverPoint; j < nodes; j++)
+			{
+				child.linkmatrix[i][j] = secondParent.linkmatrix[i][j];
+			}
+		}
 
 		return child;
 	}
