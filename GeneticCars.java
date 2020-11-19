@@ -94,6 +94,22 @@ public class GeneticCars implements MouseListener
 		// Go through every pair of cars in population
 		//  with probability BREED_RATE, mate them by calling the "breed" method in class Car, and add the child to the new car arraylist
 		//finally copy the cars in new car over to the population
+
+		ArrayList<Car> newCars = new ArrayList<Car>();
+
+		for (Car daddy : population) 
+		{
+			for (Car mommy : population) 
+			{
+				if (Math.random() < BREED_RATE && daddy != mommy) 
+				{
+					Car child = daddy.breed(mommy);
+					newCars.add(child);
+				}
+			}
+		}
+
+		population.addAll(newCars);
 	}
 
 	//TODO
