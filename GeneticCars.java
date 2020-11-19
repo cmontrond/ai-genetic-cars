@@ -117,9 +117,24 @@ public class GeneticCars implements MouseListener
 	public void mutate()
 	{
 		//Make an arraylist of new cars
+		ArrayList<Car> newCars = new ArrayList<Car>();
+
 		// Go through every car in the population
-		//   with probability MUTATE_SELECTION_RATE, call the "mutate" method in class Car and add the child to the new car arraylist
+		for (Car car : population) 
+		{
+			// with probability MUTATE_SELECTION_RATE
+			if (Math.random() < MUTATE_SELECTION_RATE)
+			{
+				// call the "mutate" method in class Car
+				Car mutant = car.mutate(MUTATE_RATE);
+
+				// add the child to the new car arraylist
+				newCars.add(mutant);
+			}	
+		}
+
 		//finally copy the cars in new car over to the population
+		population.addAll(newCars);
 	}
 
 	//TODO
