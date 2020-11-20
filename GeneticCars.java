@@ -157,7 +157,7 @@ public class GeneticCars implements MouseListener
 				Car car = population.get(index);
 				
 				// if car is better than bestCar
-				if (compare(car, bestCar))
+				if (compare(bestCar, car))
 				{
 					bestCar = car;
 					bestCarIndex = index;
