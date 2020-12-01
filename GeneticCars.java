@@ -48,6 +48,15 @@ public class GeneticCars implements MouseListener {
 	// indicates after how many generations should we change the race track
 	public static final int RACE_TRACK_CHANGE_FREQUENCY = 3;
 
+	// Controls if we should race our cars on different tracks
+	public static final boolean ENABLE_MULTI_TRACK = true;
+
+	// Tracks the current generation
+	public static int currentGeneration = 0;
+
+	// Index of the raceTrack that should be used, it can change!
+	public static int raceTrackIndex = 0;
+
 	// This arraylist holds the population of cars
 	public ArrayList<Car> population;
 
@@ -70,6 +79,7 @@ public class GeneticCars implements MouseListener {
 		// runs for generations cycles
 		for (int g = 0; g < generations; g++) {
 			// calls the breed, race, kill, mutate functions and prints the winner
+			currentGeneration++;
 			breed();
 			raceAll();
 			kill();
@@ -200,10 +210,6 @@ public class GeneticCars implements MouseListener {
 	// Create several worlds, then return one at random
 	public World makeRaceCourseOptional() {
 
-		ArrayList<World> worlds = new ArrayList<World>();
-
-		Random random = new Random();
-
 		// First World (the original world)
 		World world = new World();
 		world.WIDTH = 500;
@@ -217,6 +223,14 @@ public class GeneticCars implements MouseListener {
 		world.makeWall(354, 318, 394, 324);
 		world.makeWall(394, 324, 429, 390);
 		world.makeWall(429, 391, 498, 401);
+
+		if (!ENABLE_MULTI_TRACK) {
+			return world;
+		}
+
+		ArrayList<World> worlds = new ArrayList<World>();
+
+		Random random = new Random();
 
 		worlds.add(world);
 
@@ -251,13 +265,19 @@ public class GeneticCars implements MouseListener {
 
 		worlds.add(world);
 
-		return worlds.get(random.nextInt(worlds.size()));
+		if (currentGeneration % 3 == 0) {
+			raceTrackIndex = random.nextInt(3);
+			// System.out.println("Changed Race Track!");
+		}
+
+		return worlds.get(raceTrackIndex);
 	}
 
 	// take an individual car, make a racetrack for it and simulate it
 	// at the end of the function the car will have a score
 	public void race(Car car) {
-		World w = makeRaceCourse();
+		// World w = makeRaceCourse();
+		World w = makeRaceCourseOptional();
 		car.constructCar(w);
 		int i = 0;
 		for (i = 0; i < ITERATIONS; i++) {
@@ -271,7 +291,8 @@ public class GeneticCars implements MouseListener {
 	// show every car in population racing, one at a time
 	public void showAll() {
 		for (Car car : population) {
-			World w = makeRaceCourse();
+			// World w = makeRaceCourse();
+			World w = makeRaceCourseOptional();
 			car.constructCar(w);
 			show(w);
 		}
@@ -279,7 +300,8 @@ public class GeneticCars implements MouseListener {
 
 	// show a single car racing
 	public void show(Car car) {
-		World w = makeRaceCourse();
+		// World w = makeRaceCourse();
+		World w = makeRaceCourseOptional();
 		car.constructCar(w);
 		show(w);
 	}
