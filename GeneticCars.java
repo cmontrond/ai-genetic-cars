@@ -45,6 +45,9 @@ public class GeneticCars implements MouseListener {
 	// is altered
 	public static final double MUTATE_RATE = 0.1;
 
+	// indicates after how many generations should we change the race track
+	public static final int RACE_TRACK_CHANGE_FREQUENCY = 3;
+
 	// This arraylist holds the population of cars
 	public ArrayList<Car> population;
 
@@ -153,6 +156,7 @@ public class GeneticCars implements MouseListener {
 			// remove the best car from population and put it in the keep list
 			population.remove(bestCarIndex);
 			carsToKeep.add(bestCar);
+			// System.out.println("Score of removed best car: " + bestCar.score_position);
 		}
 
 		// set population=keep to make the keep list your population
@@ -191,6 +195,63 @@ public class GeneticCars implements MouseListener {
 		world.makeWall(394, 324, 429, 390);
 		world.makeWall(429, 391, 498, 401);
 		return world;
+	}
+
+	// Create several worlds, then return one at random
+	public World makeRaceCourseOptional() {
+
+		ArrayList<World> worlds = new ArrayList<World>();
+
+		Random random = new Random();
+
+		// First World (the original world)
+		World world = new World();
+		world.WIDTH = 500;
+		world.HEIGHT = 500;
+		world.makeWall(1, 500, 499, 500);
+		world.makeWall(-20, 132, 123, 285);
+		world.makeWall(104, 285, 203, 277);
+		world.makeWall(202, 275, 271, 344);
+		world.makeWall(271, 344, 320, 344);
+		world.makeWall(321, 345, 354, 318);
+		world.makeWall(354, 318, 394, 324);
+		world.makeWall(394, 324, 429, 390);
+		world.makeWall(429, 391, 498, 401);
+
+		worlds.add(world);
+
+		// Second World (hard)
+		world = new World();
+		world.WIDTH = 500;
+		world.HEIGHT = 500;
+		world.makeWall(2, 148, 87, 265);
+		world.makeWall(77, 266, 168, 220);
+		world.makeWall(160, 218, 190, 287);
+		world.makeWall(175, 291, 237, 272);
+		world.makeWall(227, 260, 271, 334);
+		world.makeWall(261, 336, 335, 319);
+		world.makeWall(328, 304, 373, 385);
+		world.makeWall(367, 391, 419, 349);
+		world.makeWall(411, 348, 485, 410);
+
+		worlds.add(world);
+
+		// Third World (easy)
+		world = new World();
+		world.WIDTH = 500;
+		world.HEIGHT = 500;
+
+		world.makeWall(3, 181, 91, 294);
+		world.makeWall(88, 294, 122, 276);
+		world.makeWall(121, 274, 177, 326);
+		world.makeWall(175, 328, 258, 329);
+		world.makeWall(260, 329, 330, 382);
+		world.makeWall(331, 384, 407, 391);
+		world.makeWall(408, 389, 494, 424);
+
+		worlds.add(world);
+
+		return worlds.get(random.nextInt(worlds.size()));
 	}
 
 	// take an individual car, make a racetrack for it and simulate it
