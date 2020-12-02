@@ -94,9 +94,17 @@ public class GeneticCars implements MouseListener {
 				raceTrackIndex = new Random().nextInt(3);
 				// System.out.println("Changed Race Track!");
 			}
+			// System.out.println("Best car score before breed:" +
+			// population.get(0).score_position);
 			breed();
+			// System.out.println("Best car score before racing:" +
+			// population.get(0).score_position);
 			raceAll();
+			// System.out.println("Best car score before killing:" +
+			// population.get(0).score_position);
 			kill();
+			// System.out.println("Best car score before mutating:" +
+			// population.get(0).score_position);
 			mutate();
 			System.out.println("Generation " + (g + 1) + ": best car has distance " + population.get(0).score_position
 					+ "/500, Iterations " + population.get(0).score_iterations + "/2000");
@@ -161,6 +169,8 @@ public class GeneticCars implements MouseListener {
 		ArrayList<Car> carsToKeep = new ArrayList<Car>();
 
 		// Do this KILLTOPOPULATION times:
+		// System.out.println("Best car score before killing:" +
+		// population.get(0).score_position);
 		for (int i = 0; i < KILLTOPOPULATION; i++) {
 			Car bestCar = population.get(0);
 			int bestCarIndex = 0;
@@ -185,6 +195,8 @@ public class GeneticCars implements MouseListener {
 
 		// set population=keep to make the keep list your population
 		population = carsToKeep;
+		// System.out.println("Best car score after killing:" +
+		// population.get(0).score_position);
 	}
 
 	// false if a is better, true if b is better
