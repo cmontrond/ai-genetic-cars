@@ -71,6 +71,16 @@ public class GeneticCars implements MouseListener {
 		generateInitialPopulation(KILLTOPOPULATION);
 		doGenetic(GENERATIONS);
 
+		// print number of cars that made it to the end
+		// long champions = population.stream().filter(car -> car.score_position >=
+		// 500).count();
+		// System.out.println(champions + " cars made it to the end of the track!");
+
+		// print percentage of cars that made it to the end
+		// double championsPercentage = (champions * 100) / population.size();
+		// System.out.println(championsPercentage + "% of the cars made it to the end of
+		// the track!");
+
 		show(population.get(0));
 	}
 
@@ -82,7 +92,7 @@ public class GeneticCars implements MouseListener {
 			currentGeneration++;
 			if (currentGeneration % 3 == 0 && ENABLE_MULTI_TRACK) {
 				raceTrackIndex = new Random().nextInt(3);
-				System.out.println("Changed Race Track!");
+				// System.out.println("Changed Race Track!");
 			}
 			breed();
 			raceAll();
