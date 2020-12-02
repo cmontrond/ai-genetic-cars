@@ -49,7 +49,7 @@ public class GeneticCars implements MouseListener {
 	public static final int RACE_TRACK_CHANGE_FREQUENCY = 3;
 
 	// Controls if we should race our cars on different tracks
-	public static final boolean ENABLE_MULTI_TRACK = true;
+	public static final boolean ENABLE_MULTI_TRACK = false;
 
 	// Tracks the current generation
 	public static int currentGeneration = 0;
@@ -80,6 +80,10 @@ public class GeneticCars implements MouseListener {
 		for (int g = 0; g < generations; g++) {
 			// calls the breed, race, kill, mutate functions and prints the winner
 			currentGeneration++;
+			if (currentGeneration % 3 == 0 && ENABLE_MULTI_TRACK) {
+				raceTrackIndex = new Random().nextInt(3);
+				System.out.println("Changed Race Track!");
+			}
 			breed();
 			raceAll();
 			kill();
@@ -230,8 +234,6 @@ public class GeneticCars implements MouseListener {
 
 		ArrayList<World> worlds = new ArrayList<World>();
 
-		Random random = new Random();
-
 		worlds.add(world);
 
 		// Second World (hard)
@@ -264,11 +266,6 @@ public class GeneticCars implements MouseListener {
 		world.makeWall(408, 389, 494, 424);
 
 		worlds.add(world);
-
-		if (currentGeneration % 3 == 0) {
-			raceTrackIndex = random.nextInt(3);
-			// System.out.println("Changed Race Track!");
-		}
 
 		return worlds.get(raceTrackIndex);
 	}
