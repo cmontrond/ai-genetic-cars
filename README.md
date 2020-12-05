@@ -44,6 +44,23 @@ Testing the physics simulator:
 java Interactive
 ```
 
+Enabling multiple tracks:
+
+```
+Set ENABLE_MULTI_TRACK (line 52) to true. This will make it so that the program randomly
+chooses a different track every RACE_TRACK_CHANGE_FREQUENCY generations.
+```
+
+## What Was Successfully Accomplished
+* Breed step of Genetic Algorithm ✔
+* Kill step of Genetic Algorithm ✔
+* Mutate step of Genetic Algorithm ✔
+* Complete Genetic Algorithm working for single track ✔
+* Complete Genetic Algorithm working for multiple tracks ✔
+
+## Statement
+The project was completed, including all of the steps and the "Optional A".
+
 ## Built With
 
 * [Java](https://www.oracle.com/java/technologies/javase-downloads.html) - The Programming Language
