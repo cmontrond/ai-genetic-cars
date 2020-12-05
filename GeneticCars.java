@@ -49,7 +49,7 @@ public class GeneticCars implements MouseListener {
 	public static final int RACE_TRACK_CHANGE_FREQUENCY = 3;
 
 	// Controls if we should race our cars on different tracks
-	public static final boolean ENABLE_MULTI_TRACK = false;
+	public static final boolean ENABLE_MULTI_TRACK = true;
 
 	// Tracks the current generation
 	public static int currentGeneration = 0;
