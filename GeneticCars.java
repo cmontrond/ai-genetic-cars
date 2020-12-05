@@ -71,15 +71,17 @@ public class GeneticCars implements MouseListener {
 		generateInitialPopulation(KILLTOPOPULATION);
 		doGenetic(GENERATIONS);
 
+		// print the total number of cars
+		int totalCars = population.size();
+		System.out.println("\nThe final population has a total of " + totalCars + " cars.");
+
 		// print number of cars that made it to the end
-		// long champions = population.stream().filter(car -> car.score_position >=
-		// 500).count();
-		// System.out.println(champions + " cars made it to the end of the track!");
+		long champions = population.stream().filter(car -> car.score_position >= 500).count();
+		System.out.println(champions + " cars made it to the end of the track!");
 
 		// print percentage of cars that made it to the end
-		// double championsPercentage = (champions * 100) / population.size();
-		// System.out.println(championsPercentage + "% of the cars made it to the end of
-		// the track!");
+		double championsPercentage = (champions * 100) / population.size();
+		System.out.println(championsPercentage + "% of the cars made it to the end of the track!");
 
 		show(population.get(0));
 	}
@@ -90,9 +92,9 @@ public class GeneticCars implements MouseListener {
 		for (int g = 0; g < generations; g++) {
 			// calls the breed, race, kill, mutate functions and prints the winner
 			currentGeneration++;
-			if (currentGeneration % 3 == 0 && ENABLE_MULTI_TRACK) {
+			if (currentGeneration % RACE_TRACK_CHANGE_FREQUENCY == 0 && ENABLE_MULTI_TRACK) {
 				raceTrackIndex = new Random().nextInt(3);
-				// System.out.println("Changed Race Track!");
+				System.out.println("Changed Race Track!");
 			}
 			// System.out.println("Best car score before breed:" +
 			// population.get(0).score_position);
@@ -217,7 +219,7 @@ public class GeneticCars implements MouseListener {
 	// make a World object containing a racetrack of walls
 	// if you do the optional step, you should make several of these and return one
 	// of them at random
-	public World makeRaceCourse() {
+	public World makeInitialRaceCourse() {
 		World world = new World();
 		world.WIDTH = 500;
 		world.HEIGHT = 500;
@@ -234,27 +236,16 @@ public class GeneticCars implements MouseListener {
 	}
 
 	// Create several worlds, then return one at random
-	public World makeRaceCourseOptional() {
-
-		// First World (the original world)
-		World world = new World();
-		world.WIDTH = 500;
-		world.HEIGHT = 500;
-		world.makeWall(1, 500, 499, 500);
-		world.makeWall(-20, 132, 123, 285);
-		world.makeWall(104, 285, 203, 277);
-		world.makeWall(202, 275, 271, 344);
-		world.makeWall(271, 344, 320, 344);
-		world.makeWall(321, 345, 354, 318);
-		world.makeWall(354, 318, 394, 324);
-		world.makeWall(394, 324, 429, 390);
-		world.makeWall(429, 391, 498, 401);
+	public World makeRaceCourse() {
 
 		if (!ENABLE_MULTI_TRACK) {
-			return world;
+			return makeInitialRaceCourse();
 		}
 
 		ArrayList<World> worlds = new ArrayList<World>();
+
+		// First World (the original world)
+		World world = makeInitialRaceCourse();
 
 		worlds.add(world);
 
@@ -296,7 +287,7 @@ public class GeneticCars implements MouseListener {
 	// at the end of the function the car will have a score
 	public void race(Car car) {
 		// World w = makeRaceCourse();
-		World w = makeRaceCourseOptional();
+		World w = makeRaceCourse();
 		car.constructCar(w);
 		int i = 0;
 		for (i = 0; i < ITERATIONS; i++) {
@@ -311,7 +302,7 @@ public class GeneticCars implements MouseListener {
 	public void showAll() {
 		for (Car car : population) {
 			// World w = makeRaceCourse();
-			World w = makeRaceCourseOptional();
+			World w = makeRaceCourse();
 			car.constructCar(w);
 			show(w);
 		}
@@ -320,7 +311,7 @@ public class GeneticCars implements MouseListener {
 	// show a single car racing
 	public void show(Car car) {
 		// World w = makeRaceCourse();
-		World w = makeRaceCourseOptional();
+		World w = makeRaceCourse();
 		car.constructCar(w);
 		show(w);
 	}
