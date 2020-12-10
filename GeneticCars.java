@@ -49,7 +49,7 @@ public class GeneticCars implements MouseListener {
 	public static final int RACE_TRACK_CHANGE_FREQUENCY = 3;
 
 	// Controls if we should race our cars on different tracks
-	public static final boolean ENABLE_MULTI_TRACK = true;
+	public static final boolean ENABLE_MULTI_TRACK = false;
 
 	// Tracks the current generation
 	public static int currentGeneration = 0;
@@ -96,17 +96,9 @@ public class GeneticCars implements MouseListener {
 				raceTrackIndex = new Random().nextInt(3);
 				System.out.println("Changed Race Track!");
 			}
-			// System.out.println("Best car score before breed:" +
-			// population.get(0).score_position);
 			breed();
-			// System.out.println("Best car score before racing:" +
-			// population.get(0).score_position);
 			raceAll();
-			// System.out.println("Best car score before killing:" +
-			// population.get(0).score_position);
 			kill();
-			// System.out.println("Best car score before mutating:" +
-			// population.get(0).score_position);
 			mutate();
 			System.out.println("Generation " + (g + 1) + ": best car has distance " + population.get(0).score_position
 					+ "/500, Iterations " + population.get(0).score_iterations + "/2000");

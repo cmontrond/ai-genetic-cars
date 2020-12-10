@@ -186,17 +186,6 @@ public class Car {
 		for (int i = 0; i < nodes; i++) {
 			for (int j = 0; j < nodes; j++) {
 				if (Math.random() < probability) {
-					// Random random = new Random();
-
-					// if (random.nextInt(2) == 1)
-					// {
-					// newCar.linkmatrix[i][j] = true;
-					// }
-					// else
-					// {
-					// newCar.linkmatrix[i][j] = false;
-					// }
-
 					newCar.linkmatrix[i][j] = !newCar.linkmatrix[i][j];
 				}
 			}
